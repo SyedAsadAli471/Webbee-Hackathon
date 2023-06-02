@@ -11,5 +11,6 @@ export const FONTS = {
   small: 8,
   smallMedium: 10,
   medium: 12,
+  mediumLarge: 18,
   large: 26,
 };

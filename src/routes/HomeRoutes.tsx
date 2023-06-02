@@ -21,6 +21,14 @@ export const HomeRoutes: FC<Props> = ({initialRouteName}) => {
           headerShown: false,
         }}
       />
+
+      <HomeStack.Screen
+        name="drawer"
+        component={DrawerRoutes}
+        options={{
+          headerShown: false,
+        }}
+      />
     </HomeStack.Navigator>
   );
 };

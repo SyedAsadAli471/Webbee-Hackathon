@@ -1,15 +1,5 @@
 import React, {useCallback, useEffect, useRef} from 'react';
-import {
-  FlatList,
-  Pressable,
-  StyleProp,
-  StyleSheet,
-  Text,
-  TextProps,
-  TextStyle,
-  View,
-} from 'react-native';
-import {Button, TextInput} from 'react-native-paper';
+import {FlatList, Pressable, StyleSheet, TextProps, View} from 'react-native';
 import AppLabel from '../app_label/AppLabel';
 import AppInputField from '../app_input/AppInputField';
 import Trash from 'assets/images/trash.svg';
@@ -25,7 +15,7 @@ import {
   CategoryProperty,
   PropertyType,
   removeCategory,
-  updatePropertyValue,
+  updateCategory,
   updateTitleField,
 } from 'store/categorySlice';
 import ItemCategoryField from '../item_category_field/ItemCategoryField';
@@ -77,14 +67,22 @@ export default ({item, categoryIndex}: ItemCategoryProps) => {
 
   return (
     <View style={styles.card} removeClippedSubviews={false}>
+      <AppLabel
+        text={
+          item?.categoryName?.length > 0
+            ? item?.categoryName
+            : Strings.category_name
+        }
+        style={styles.category}
+      />
       <AppInputField
-        label={item?.properties?.[0].propertyLabel ?? ''}
-        value={item?.properties?.[0].propertyValue ?? ''}
+        label={Strings.category_name ?? ''}
+        value={item?.categoryName ?? ''}
         onChangeText={(text: string) => {
           dispatch(
-            updatePropertyValue({
+            updateCategory({
               categoryIndex: categoryIndex,
-              propertyIndex: 0,
+
               value: text,
             }),
           );
@@ -110,12 +108,6 @@ export default ({item, categoryIndex}: ItemCategoryProps) => {
         keyExtractor={item => item.key}
         labelExtractor={item => item?.label}
         onModalClose={option => {
-          console.log(
-            option,
-            item.properties?.find(
-              _item => _item.propertyValue === option?.label,
-            ),
-          );
           option.key >= 0 &&
             dispatch(
               updateTitleField({
@@ -143,7 +135,10 @@ export default ({item, categoryIndex}: ItemCategoryProps) => {
           onModalClose={option => {
             option.key >= 0 &&
               dispatch(
-                addCategoryProperty({id: categoryIndex, type: option?.label}),
+                addCategoryProperty({
+                  id: categoryIndex,
+                  type: option?.label as PropertyType,
+                }),
               );
           }}
           initValue={Strings.add_field}>
@@ -200,5 +195,9 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     paddingStart: SPACE.small,
     textTransform: 'uppercase',
+  },
+  category: {
+    fontSize: FONTS.mediumLarge,
+    fontWeight: '500',
   },
 });

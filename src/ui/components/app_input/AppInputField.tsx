@@ -13,7 +13,7 @@ export interface AppInputProps extends TextInputProps {
   label: string;
   value: string;
   style?: StyleProp<ViewStyle>;
-  onChangeText: (text: string) => void;
+  onChangeText?: (text: string) => void;
 }
 
 export default ({
