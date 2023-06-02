@@ -423,6 +423,8 @@ PODS:
     - React
   - RNDateTimePicker (7.1.0):
     - React-Core
+  - RNDeviceInfo (10.6.0):
+    - React-Core
   - RNGestureHandler (2.10.2):
     - React-Core
   - RNKeychain (8.1.1):
@@ -526,6 +528,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNKeychain (from `../node_modules/react-native-keychain`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -624,6 +627,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNKeychain:
@@ -687,6 +692,7 @@ SPEC CHECKSUMS:
   ReactCommon: 85c98ab0a509e70bf5ee5d9715cf68dbf495b84c
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDateTimePicker: 7ecd54a97fc3749f38c3c89a171f6cbd52f3c142
+  RNDeviceInfo: 475a4c447168d0ad4c807e48ef5e0963a0f4eb1b
   RNGestureHandler: f75d81410b40aaa99e71ae8f8bb7a88620c95042
   RNKeychain: ff836453cba46938e0e9e4c22e43d43fa2c90333
   RNReanimated: c931b356bda56c0196110bdc462e48e4c2668dc3

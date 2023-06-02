@@ -11,6 +11,7 @@ import {RootState} from 'store/store';
 import {useAppDispatch, useAppSelector} from 'hooks/redux';
 import {addCategory, Category} from 'store/categorySlice';
 import ItemCategory from 'ui/components/item_category/ItemCategory';
+import {isTablet} from 'react-native-device-info';
 
 export const ManageCategories = () => {
   const navigation = useNavigation();
@@ -48,6 +49,7 @@ export const ManageCategories = () => {
             }}
             data={categories}
             renderItem={renderItem}
+            numColumns={isTablet() ? 2 : 1}
             removeClippedSubviews={false}
             ItemSeparatorComponent={() => <View style={{height: 10}} />}
             // keyExtractor={item => item?.id}

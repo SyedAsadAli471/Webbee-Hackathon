@@ -70,7 +70,7 @@ export default ({
         disabled={true}
         label={item?.propertyLabel}
         onPressOut={() => setShowDatePicker(true)}
-        value={formatDate(dob?.toString(), 'DD/MM/YYYY')}
+        value={dob ? formatDate(dob?.toString(), 'DD/MM/YYYY') : ''}
       />
 
       {showDatePicker && (

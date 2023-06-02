@@ -15,6 +15,7 @@ import Strings from 'config/Strings';
 import ItemSwitch from '../item_switch/ItemSwitch';
 import ItemDatePicker from '../item_date_picker/ItemDatePicker';
 import {shadowStyleProps} from 'utils/utils';
+import {isTablet} from 'react-native-device-info';
 
 export interface ItemMachineProps extends TextProps {
   item?: MachineCategory[];
@@ -83,7 +84,11 @@ export default ({item, machineIndex}: ItemMachineProps) => {
   );
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        isTablet() && machineIndex % 2 === 0 && {marginEnd: SPACE.small},
+      ]}>
       <FlatList
         data={item}
         renderItem={renderItem}

@@ -13,6 +13,7 @@ import {RootState} from 'store/store';
 import Colors from 'config/Colors';
 import ItemMachine from 'ui/components/item_machine/ItemMachine';
 import {addMachine, MachineCategory} from 'store/categorySlice';
+import {isTablet} from 'react-native-device-info';
 
 type DashboardNav = DrawerNavigationProp<DrawerParamList, 'Dashboard'>;
 
@@ -21,7 +22,6 @@ export const CategoriesController = () => {
   const dispatch = useAppDispatch();
   const {categories} = useAppSelector((state: RootState) => state.category);
 
-  // console.log('categories', JSON.stringify(categories));
   const renderItem = useCallback(
     ({item, index}: {item: MachineCategory[]; index: number}) => {
       return <ItemMachine item={item} machineIndex={index} />;
@@ -54,6 +54,7 @@ export const CategoriesController = () => {
                 renderItem={renderItem}
                 style={styles.list}
                 contentContainerStyle={styles.listContent}
+                numColumns={isTablet() ? 2 : 1}
                 ItemSeparatorComponent={() => (
                   <View style={{height: SPACE.small}} />
                 )}

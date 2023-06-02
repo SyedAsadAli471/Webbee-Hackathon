@@ -268,6 +268,12 @@ export const categorySlice = createSlice({
     },
     addDataFromStore: (state, {payload}: PayloadAction<Category[]>) => {
       state.categories = payload;
+
+      let navItem: string[] = [];
+      state.categories.map(item => {
+        item?.categoryName && navItem.push(item?.categoryName);
+      });
+      state.navdrawer = navItem;
     },
   },
 });

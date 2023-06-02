@@ -21,6 +21,7 @@ import {
 import ItemCategoryField from '../item_category_field/ItemCategoryField';
 import AppButton from '../app_button/AppButton';
 import {shadowStyleProps} from 'utils/utils';
+import {isTablet} from 'react-native-device-info';
 
 export interface ItemCategoryProps extends TextProps {
   item: Category;
@@ -44,13 +45,24 @@ export default ({item, categoryIndex}: ItemCategoryProps) => {
 
   const propertiesData = useRef<DropDown[]>([]);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   propertiesData.current = [];
+
+  //   categories[categoryIndex].properties?.map((item, index) => {
+  //     propertiesData.current.push({key: index, label: item.propertyValue});
+  //   });
+  // }, [categories]);
+
+  const getModalData = useCallback(() => {
     propertiesData.current = [];
 
-    item.properties?.map((item, index) => {
-      propertiesData.current.push({key: index, label: item.propertyValue});
+    categories[categoryIndex].properties?.map((item, index) => {
+      item.propertyValue &&
+        propertiesData.current.push({key: index, label: item.propertyValue});
     });
-  }, [item]);
+
+    return propertiesData.current;
+  }, [categories]);
 
   const renderItem = useCallback(
     ({item, index}: {item: CategoryProperty; index: number}) => {
@@ -66,7 +78,11 @@ export default ({item, categoryIndex}: ItemCategoryProps) => {
   );
 
   return (
-    <View style={styles.card} removeClippedSubviews={false}>
+    <View
+      style={[
+        styles.card,
+        isTablet() && categoryIndex % 2 === 0 && {marginEnd: SPACE.small},
+      ]}>
       <AppLabel
         text={
           item?.categoryName?.length > 0
@@ -82,7 +98,6 @@ export default ({item, categoryIndex}: ItemCategoryProps) => {
           dispatch(
             updateCategory({
               categoryIndex: categoryIndex,
-
               value: text,
             }),
           );
@@ -104,7 +119,7 @@ export default ({item, categoryIndex}: ItemCategoryProps) => {
       />
 
       <ModalSelector
-        data={propertiesData.current}
+        data={getModalData()}
         keyExtractor={item => item.key}
         labelExtractor={item => item?.label}
         onModalClose={option => {
@@ -162,6 +177,7 @@ export default ({item, categoryIndex}: ItemCategoryProps) => {
 
 const styles = StyleSheet.create({
   card: {
+    flex: 1,
     backgroundColor: Colors.white,
     borderRadius: SPACE.borderRadius,
     borderColor: Colors.grey_normal,
