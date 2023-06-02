@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": "./src/" /* Base directory to resolve non-absolute module names. */
   },
   "extends": "@tsconfig/react-native/tsconfig.json"
 }
